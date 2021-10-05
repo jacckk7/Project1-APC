@@ -1,5 +1,5 @@
 #####################################################################################################
-###################################### Projejo 1 de APC #############################################
+###################################### Projeto 1 de APC #############################################
 ################################## Breno Costa Avelino Lima #########################################
 #####################################################################################################
 
@@ -14,6 +14,14 @@ from copy import deepcopy
 #####################################################################################################
 #################################### functions definition ###########################################
 #####################################################################################################
+
+def calc_time(config_hold, time_hold):
+    j = 0
+    for j in range(len(time_hold)):
+        time_hold[j][0] -= 1
+        if time_hold[j][0] == 0:
+            config_hold[time_hold[j][1]][1] += 1
+            config_hold[time_hold[j][1]][3] -= time_hold[j][2]
 
 def configuracao():
     i = 0
@@ -75,12 +83,7 @@ def comando_um(config_hold, time_hold, count_people):
         print('Nao foi possivel levar o grupo de clientes para uma mesa.')
         count_people -= n_people
         
-    j = 0
-    for j in range(len(time_hold)):
-        time_hold[j][0] -= 1
-        if time_hold[j][0] == 0:
-            config_hold[time_hold[j][1]][1] += 1
-            config_hold[time_hold[j][1]][3] -= time_hold[j][2]
+    calc_time(config_hold, time_hold)
         
     return count_people
         
@@ -115,12 +118,7 @@ def comando_dois(config, config_hold, time_hold):
             count_tables1 = config_sort[i][1]
             count_tables2 = config_hold_sort[i][1]
         
-    j = 0
-    for j in range(len(time_hold)):
-        time_hold[j][0] -= 1
-        if time_hold[j][0] == 0:
-            config_hold[time_hold[j][1]][1] += 1
-            config_hold[time_hold[j][1]][3] -= time_hold[j][2]
+    calc_time(config_hold, time_hold)
 
 def comando_tres(config, config_hold, time_hold):
     config_sort = deepcopy(config)
@@ -153,12 +151,7 @@ def comando_tres(config, config_hold, time_hold):
             count_chairs1 = (config_sort[i][1] * config_sort[i][2])
             count_chairs2 = config_hold_sort[i][3]
         
-    j = 0
-    for j in range(len(time_hold)):
-        time_hold[j][0] -= 1
-        if time_hold[j][0] == 0:
-            config_hold[time_hold[j][1]][1] += 1
-            config_hold[time_hold[j][1]][3] -= time_hold[j][2]
+    calc_time(config_hold, time_hold)
 
 def comando_quatro(config, config_hold, time_hold):
     request = input().split()
@@ -185,12 +178,7 @@ def comando_quatro(config, config_hold, time_hold):
                 config_hold[i][1] -= tables
         print(f'{tables} mesas de {chairs} cadeiras removidas com sucesso na area {name_area}.')
         
-    j = 0
-    for j in range(len(time_hold)):
-        time_hold[j][0] -= 1
-        if time_hold[j][0] == 0:
-            config_hold[time_hold[j][1]][1] += 1
-            config_hold[time_hold[j][1]][3] -= time_hold[j][2]
+    calc_time(config_hold, time_hold)
             
 
 #####################################################################################################
